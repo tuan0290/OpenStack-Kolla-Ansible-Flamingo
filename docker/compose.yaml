@@ -1,0 +1,17 @@
+services:
+  kolla-ansible:
+    container_name: kolla-ansible
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    volumes:
+      # Source code và inventory
+      - "../:/kolla"
+      # Kolla config (globals.yml, passwords.yml)
+      - "../config/kolla:/etc/kolla"
+      # SSH key từ bastion host
+      - "~/.ssh:/root/.ssh:ro"
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING=False
+      - ANSIBLE_STDOUT_CALLBACK=yaml
