@@ -86,15 +86,14 @@ object1 ansible_host=192.168.225.198 ansible_user=root
 object2 ansible_host=192.168.225.199 ansible_user=root
 ```
 
-### 2.2 Cập nhật globals.yml
+### 2.2 Tạo globals.d/swift.yml
 
-Thêm vào `/etc/kolla/globals.yml`:
-
-```yaml
-# Swift
+```bash
+cat > /etc/kolla/globals.d/swift.yml << 'EOF'
 enable_swift: "yes"
 swift_devices_name: "KOLLA_SWIFT_DATA"
 swift_devices_match_mode: "prefix"
+EOF
 ```
 
 ### 2.3 Tạo Swift rings

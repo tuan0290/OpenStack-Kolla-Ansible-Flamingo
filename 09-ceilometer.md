@@ -5,7 +5,7 @@
 ## Mục lục
 
 1. [Tổng quan kiến trúc Telemetry](#1-tổng-quan-kiến-trúc-telemetry)
-2. [Cấu hình globals.yml](#2-cấu-hình-globalsyml)
+2. [Tạo globals.d/telemetry.yml](#2-tạo-globalsdTelemetryyml)
 3. [Deploy Telemetry stack](#3-deploy-telemetry-stack)
 4. [Kiểm tra các service](#4-kiểm-tra-các-service)
 5. [Xem metrics và tạo alarm](#5-xem-metrics-và-tạo-alarm)
@@ -40,21 +40,18 @@ Nova/Neutron/Cinder...
 
 ---
 
-## 2. Cấu hình globals.yml
+## 2. Tạo globals.d/telemetry.yml
 
-Thêm vào `/etc/kolla/globals.yml`:
-
-```yaml
-# Telemetry
+```bash
+cat > /etc/kolla/globals.d/telemetry.yml << 'EOF'
 enable_ceilometer: "yes"
 enable_gnocchi: "yes"
 enable_aodh: "yes"
-
-# Gnocchi storage backend (file cho lab, ceph cho production)
 gnocchi_backend_storage: "file"
+EOF
 ```
 
-> Trong production, dùng `gnocchi_backend_storage: "ceph"` để lưu metrics trên Ceph cluster, đảm bảo HA và scale tốt hơn.
+> Trong production, đổi `gnocchi_backend_storage: "ceph"` để lưu metrics trên Ceph cluster.
 
 ---
 

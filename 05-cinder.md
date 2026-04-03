@@ -78,18 +78,19 @@ Sửa `~/multinode`, thêm storage1 vào group `[storage]`:
 
 ```ini
 [storage]
-storage1 ansible_host=192.168.225.197 ansible_user=root
+storage1 ansible_host=192.168.225.197 ansible_user=root ansible_become=True ansible_private_key_file=~/.ssh/id_ed25519
 ```
 
-### 2.2 Cập nhật globals.yml
+### 2.2 Tạo globals.d/cinder.yml
 
-Thêm vào `/etc/kolla/globals.yml`:
+```bash
+mkdir -p /etc/kolla/globals.d
 
-```yaml
-# Cinder
+cat > /etc/kolla/globals.d/cinder.yml << 'EOF'
 enable_cinder: "yes"
 enable_cinder_backend_lvm: "yes"
 cinder_volume_group: "cinder-volumes"
+EOF
 ```
 
 ### 2.3 Bootstrap storage1

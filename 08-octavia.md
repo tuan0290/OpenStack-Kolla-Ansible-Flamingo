@@ -5,7 +5,7 @@
 ## Mục lục
 
 1. [Chuẩn bị Octavia Amphora image](#1-chuẩn-bị-octavia-amphora-image)
-2. [Cấu hình globals.yml](#2-cấu-hình-globalsyml)
+2. [Tạo globals.d/octavia.yml](#2-tạo-globalsdOctaviayml)
 3. [Deploy Octavia](#3-deploy-octavia)
 4. [Kiểm tra Octavia](#4-kiểm-tra-octavia)
 5. [Tạo Load Balancer đầu tiên](#5-tạo-load-balancer-đầu-tiên)
@@ -52,23 +52,14 @@ openstack image create \
 
 ---
 
-## 2. Cấu hình globals.yml
+## 2. Tạo globals.d/octavia.yml
 
-Thêm vào `/etc/kolla/globals.yml`:
-
-```yaml
-# Octavia
+```bash
+cat > /etc/kolla/globals.d/octavia.yml << 'EOF'
 enable_octavia: "yes"
-
-# Network cho Amphora management (Octavia tự tạo network này)
 octavia_network_interface: "ens37"
+EOF
 ```
-
-Kolla-Ansible sẽ tự động:
-- Tạo Octavia management network (`lb-mgmt-net`)
-- Tạo security group cho Amphora
-- Tạo keypair cho SSH vào Amphora
-- Tạo flavor cho Amphora VM
 
 ---
 

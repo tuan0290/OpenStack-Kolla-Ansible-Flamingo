@@ -4,19 +4,19 @@
 
 ## Mục lục
 
-1. [Cấu hình globals.yml](#1-cấu-hình-globalsyml)
+1. [Tạo globals.d/heat.yml](#1-tạo-globalsdHeatyml)
 2. [Deploy Heat](#2-deploy-heat)
 3. [Kiểm tra Heat](#3-kiểm-tra-heat)
 4. [Tạo stack đầu tiên](#4-tạo-stack-đầu-tiên)
 
 ---
 
-## 1. Cấu hình globals.yml
+## 1. Tạo globals.d/heat.yml
 
-Thêm vào `/etc/kolla/globals.yml`:
-
-```yaml
+```bash
+cat > /etc/kolla/globals.d/heat.yml << 'EOF'
 enable_heat: "yes"
+EOF
 ```
 
 ---
